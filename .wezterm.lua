@@ -71,7 +71,7 @@ config.default_domain = 'WSL:Ubuntu'
 
 config.font = wezterm.font_with_fallback {
   --'Hack',
-  'Consolas', 
+  'Consolas',
   'JetBrains Mono',
   'Segoe UI Symbol',
   'Segoe UI Emoji',
@@ -329,7 +329,7 @@ local function set_theme(window, index)
 end
 
 config.keys = {
-  
+
   -- Debug overlay
   {
     key = 'O',
