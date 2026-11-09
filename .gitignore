@@ -1,0 +1,11 @@
+# Editor / tool state
+.serena/
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
