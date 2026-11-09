@@ -9,7 +9,9 @@
 
 -- Helper function to safely clone nested tables
 local function deep_copy(orig)
-  if type(orig) ~= 'table' then return orig end
+  if type(orig) ~= 'table' then
+    return orig
+  end
   local copy = {}
   for k, v in pairs(orig) do
     copy[deep_copy(k)] = deep_copy(v)
@@ -48,7 +50,6 @@ config.dpi_by_screen = {
   ['DISPLAY6: DELL U2412M on NVIDIA GeForce RTX 4070 Laptop GPU'] = 96.0,
 }
 
-
 -- ── WSL ────────────────────────────────────────────────────────────────
 -- PERF: Declaring the domain explicitly means WezTerm doesn't have to run
 -- `wsl.exe -l -v` to discover distros every time this config is evaluated.
@@ -81,14 +82,13 @@ config.line_height = 1.1
 config.cell_width = 0.85
 
 -- ── Cursor (Warp uses a block) ─────────────────────────────────────────
-config.default_cursor_style = 'SteadyBlock'  -- 'SteadyBlock' for no blink
+config.default_cursor_style = 'SteadyBlock' -- 'SteadyBlock' for no blink
 config.cursor_blink_rate = 500
 
 -- ── HiDPI rendering: grayscale AA, light hinting for shape fidelity ────
 
 --config.freetype_load_target = 'Light'
 -- config.freetype_render_target = 'VerticalLcd'
-
 
 -- ── Color scheme  ──────────────────────────────────────────────────────
 
@@ -137,11 +137,11 @@ local scotchy = {
 
   tab_bar = {
     background = '#1f242b',
-    active_tab       = { bg_color = '#272d35', fg_color = '#ffffff' },
-    inactive_tab     = { bg_color = '#343c48', fg_color = '#bdc1c7' },
+    active_tab = { bg_color = '#272d35', fg_color = '#ffffff' },
+    inactive_tab = { bg_color = '#343c48', fg_color = '#bdc1c7' },
     inactive_tab_hover = { bg_color = '#434d5b', fg_color = '#ffffff' },
-    new_tab          = { bg_color = '#272d35', fg_color = '#535e6f' },
-    new_tab_hover    = { bg_color = '#434d5b', fg_color = '#ffffff' },
+    new_tab = { bg_color = '#272d35', fg_color = '#535e6f' },
+    new_tab_hover = { bg_color = '#434d5b', fg_color = '#ffffff' },
   },
 }
 config.color_schemes['Scotchy'] = deep_copy(scotchy)
@@ -186,11 +186,11 @@ local copilot = {
 
   tab_bar = {
     background = '#1a2023',
-    active_tab       = { bg_color = '#232a2f', fg_color = '#d4dce4' },
-    inactive_tab     = { bg_color = '#1a2023', fg_color = '#939da5' },
+    active_tab = { bg_color = '#232a2f', fg_color = '#d4dce4' },
+    inactive_tab = { bg_color = '#1a2023', fg_color = '#939da5' },
     inactive_tab_hover = { bg_color = '#232a2f', fg_color = '#d4dce4' },
-    new_tab          = { bg_color = '#1a2023', fg_color = '#939da5' },
-    new_tab_hover    = { bg_color = '#232a2f', fg_color = '#d4dce4' },
+    new_tab = { bg_color = '#1a2023', fg_color = '#939da5' },
+    new_tab_hover = { bg_color = '#232a2f', fg_color = '#d4dce4' },
   },
 }
 config.color_schemes['Copilot'] = deep_copy(copilot)
@@ -200,10 +200,10 @@ config.color_schemes['Copilot'] = deep_copy(copilot)
 -- was being called three times on every config load. Call it once, then
 -- deep_copy the individual entries you modify so they don't share a table.
 local builtin = wezterm.color.get_builtin_schemes()
-local helios  = builtin['Helios (base16)']
+local helios = builtin['Helios (base16)']
 local claude1 = deep_copy(builtin['Atom'])
 local claude2 = deep_copy(builtin['Atom'])
-local claude3 = deep_copy(copilot)  -- copy, so changing it doesn't alter `copilot`
+local claude3 = deep_copy(copilot) -- copy, so changing it doesn't alter `copilot`
 claude1.background = scotchy.background
 claude2.background = helios.background
 claude3.background = helios.background
@@ -282,7 +282,6 @@ for i, name in ipairs(favorite_themes) do
   end
 end
 
-
 -- ── Launch menu ──────────────────────────────────────
 config.launch_menu = {}
 for host, _ in pairs(wezterm.enumerate_ssh_hosts()) do
@@ -307,16 +306,15 @@ table.insert(config.launch_menu, {
   domain = { DomainName = 'local' },
 })
 
-
 -- ── Window  ────────────────────────────────────────────────────────────
 config.window_padding = { left = 10, right = 10, top = 8, bottom = 8 }
 config.window_decorations = 'TITLE | RESIZE'
-config.window_background_opacity = 1             -- opaque = cheapest to composite
+config.window_background_opacity = 1 -- opaque = cheapest to composite
 config.win32_system_backdrop = 'Disable'
-config.enable_tab_bar = true                   -- show the tab bar (with the + button)
-config.hide_tab_bar_if_only_one_tab = false    -- keep it visible even with one tab
-config.show_new_tab_button_in_tab_bar = true   -- the "+" new-tab button
-config.use_fancy_tab_bar = true                -- false = lighter "retro" bar (optional)
+config.enable_tab_bar = true -- show the tab bar (with the + button)
+config.hide_tab_bar_if_only_one_tab = false -- keep it visible even with one tab
+config.show_new_tab_button_in_tab_bar = true -- the "+" new-tab button
+config.use_fancy_tab_bar = true -- false = lighter "retro" bar (optional)
 config.adjust_window_size_when_changing_font_size = false
 config.exit_behavior = 'Hold'
 
